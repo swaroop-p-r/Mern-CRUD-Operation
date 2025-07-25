@@ -1,22 +1,21 @@
 # Mern-CRUD-Operation
-````markdown
 A basic MERN Stack application demonstrating **CRUD (Create, Read, Update, Delete)** operations.
 
-## 📚 Tech Stack
+📚 Tech Stack
 
 - **MongoDB** – NoSQL Database
 - **Express.js** – Web Framework for Node.js
 - **React.js** – Frontend Library
 - **Node.js** – Runtime Environment
 
-## 🚀 Features
+🚀 Features
 
 - 🔹 Create new records
 - 🔹 Read and display records
 - 🔹 Update existing records
 - 🔹 Delete records
 
-## 📁 Project Structure
+📁 Project Structure
 
 ```bash
 Mern-CRUD-Operation/
