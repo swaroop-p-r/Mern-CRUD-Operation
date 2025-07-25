@@ -42,6 +42,7 @@ export default function Login() {
                     onChange={handleChange}
                     className="border border-gray-300 rounded px-2 py-1 w-full mb-3"
                 />
+                
 
                 <label htmlFor="Password" className="block mb-1">Password</label>
                 <input

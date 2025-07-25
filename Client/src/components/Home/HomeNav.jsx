@@ -13,6 +13,7 @@ export default function HomeNav() {
                     >
                         Register
                     </Link>
+                    
                     <Link
                         to={'/login'}
                         className='text-white hover:bg-amber-400 px-3 py-2 rounded-md text-sm font-medium'

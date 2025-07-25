@@ -8,7 +8,7 @@ export default function AdminNav() {
         to={'/'}
         className='bg-amber-50'
         >
-        
+            Nav Bar
         </Link>
 
       </nav>

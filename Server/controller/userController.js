@@ -7,7 +7,7 @@ const registerUser = async (req, res) => {
         if (userExist) {
             return res.status(400).json({ msg: 'Email already rergistered' })
         }
-        const newUser = new User({
+        const newUser = new User({ 
             username,
             email,
             password,
