@@ -1,3 +1,4 @@
+const Task = require('../model/Task');
 const User = require('../model/User');
 
 const registerUser = async (req, res) => {
@@ -7,7 +8,7 @@ const registerUser = async (req, res) => {
         if (userExist) {
             return res.status(400).json({ msg: 'Email already rergistered' })
         }
-        const newUser = new User({ 
+        const newUser = new User({
             username,
             email,
             password,
@@ -15,7 +16,7 @@ const registerUser = async (req, res) => {
         await newUser.save()
         res.status(201).json({ msg: 'User Registered successfully' });
     } catch (error) {
-        console.error('Registartion Error:',error)
+        console.error('Registartion Error:', error)
         res.status(500).json({ msg: 'Server Registartion Error' })
     }
 }
@@ -28,14 +29,32 @@ const loginUser = async (req, res) => {
             return res.status(401).json({ msg: 'Invalid Credentials' })
         }
         if (password === userExist.password) {
-            return res.status(200).json({ msg: 'Login Successfull' })
+            return res.status(200).json({ msg: 'Login Successfull', userid: userExist._id })
         } else {
             return res.status(401).json({ msg: 'Invalid Password' })
         }
     } catch (error) {
-        console.error('Login Server Failed:',error)
+        console.error('Login Server Failed:', error)
         return res.status(500).json({ msg: 'Login Server Failed' })
     }
 }
 
-module.exports = { registerUser,loginUser };
+const addTask = async (req, res) => {
+    const { title, description, status } = req.body;
+    const userid = req.headers.userid;
+    try {
+        const task = new Task({
+            user: userid,
+            title,
+            description,
+            status,
+        })
+        await task.save();
+        return res.status(200).json({ msg: 'Task Added Successfully' })
+    } catch (error) {
+        console.error('Task Add Server Error:', error);
+        return res.status(500).json({ msg: 'Task Add Server Error' })
+    }
+}
+
+module.exports = { registerUser, loginUser, addTask };
