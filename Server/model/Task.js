@@ -10,6 +10,6 @@ const taskSchema = mongoose.Schema({
     status: { type: Boolean, required: true, default: false },
 }, { timestamps: true })
 
-const Task = mongoose.model('task', taskSchema);
+const Task = mongoose.model('task_tbl', taskSchema);
 
 module.exports = Task;

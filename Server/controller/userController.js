@@ -1,5 +1,5 @@
-const Task = require('../model/Task');
 const User = require('../model/User');
+const Task = require('../model/Task');
 
 const registerUser = async (req, res) => {
     const { username, email, password } = req.body;
@@ -61,10 +61,10 @@ const viewTask = async (req, res) => {
     const userid = req.headers.userid;
     try {
         if (!userid) {
-            return res.status(400).json({msg:'User id not found!'});
+            return res.status(400).json({ msg: 'User id not found!' });
         }
         const task = await Task.find({ user: userid })
-        .sort({createdAt: -1});
+            .sort({ createdAt: -1 });
         res.status(200).json(task);
     } catch (error) {
         console.error('View Task Server Error:', error)
@@ -73,20 +73,74 @@ const viewTask = async (req, res) => {
 
 }
 
-const statusTask = async (req,res) => {
+const statusTask = async (req, res) => {
     const taskid = req.params.id;
     try {
         if (!taskid) {
-            return res.status(400).json({msg:'Task id not found!'});
+            return res.status(400).json({ msg: 'Task id not found!' });
         }
         const task = await Task.findById(taskid);
         task.status = !task.status;
         await task.save();
-        res.status(200).json({msg:'Task Status Updated'});
+        res.status(200).json({ msg: 'Task Status Updated' });
     } catch (error) {
-        console.error('Status Task Error:',err);
-        return res.status(500).json({msg:'Status Task Error'});
+        console.error('Status Task Error:', error);
+        return res.status(500).json({ msg: 'Status Task Error' });
     }
 }
 
-module.exports = { statusTask, viewTask, registerUser, loginUser, addTask };
+const deleteTask = async (req, res) => {
+    const taskid = req.params.id;
+    try {
+        if (!taskid) {
+            return res.status(400).json({ msg: 'Task id not found!' });
+        }
+        const task = await Task.findByIdAndDelete(taskid);
+        if (!task) {
+            return res.status(400).json({ msg: 'Task not Deleted!' });
+        }
+        res.status(200).json({ msg: 'Task Deleted Successfully' });
+    } catch (error) {
+        console.error('Task Deletion Error', error);
+        return res.status(500).json({ msg: 'Task Deletion Error' });
+    }
+}
+
+const getTaskById = async (req, res) => {
+    const taskid = req.params.id;
+    try {
+        if (!taskid) {
+            return res.status(400).json({ msg: 'Task id not found!' });
+        }
+        const task = await Task.findById(taskid);
+        if (!task) {
+            return res.status(400).json({ msg: 'Task not found!' });
+        }
+        res.status(200).json(task);
+    } catch (error) {
+        console.error('Task Server Error', error);
+        return res.status(500).json({ msg: 'Task Server Error' });
+    }
+}
+
+const editTask = async (req, res) => {
+    const taskid = req.params.id;
+    const { title, description } = req.body;
+    try {
+        if (!taskid) {
+            return res.status(400).json({ msg: 'Task id not found!' });
+        }
+        const task = await Task.findByIdAndUpdate(taskid,
+            {
+                title,
+                description,
+            }
+        )
+        res.status(200).json({ msg: 'Task Updated Successfully ' })
+    } catch (error) {
+        console.error('Task Updation Error', error);
+        return res.status(500).json({ msg: 'Task Updation Error' });
+    }
+}
+
+module.exports = {editTask, getTaskById, deleteTask, statusTask, viewTask, registerUser, loginUser, addTask };

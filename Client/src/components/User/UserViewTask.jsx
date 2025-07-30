@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react'
 import UserNav from './UserNav'
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
 
 export default function UserViewTask() {
     const [formData, setFormData] = useState([]);
 
     const userid = localStorage.getItem('userid');
     // console.log(userid);
+
+    const navigate =useNavigate();
 
     const fetchTask = async () => {
         try {
@@ -46,12 +49,23 @@ export default function UserViewTask() {
         }
     }
 
-    const handleDelete = async () => {
-        alert('deleted');
+    const handleDelete = async (id) => {
+        // alert(`deleted : ${id}`);
+        try {
+            const res= await axios.delete(`http://localhost:5000/api/user/deletetask/${id}`)
+            if (res.status===200) {
+                toast.success(res.data.msg);
+                fetchTask();
+            }
+        } catch (error) {
+            console.error('Task Deletion Error:',error);
+            alert(error.response?.data?.msg || 'Task Deletion Error');
+        }
     }
 
-    const handleEdit = async () => {
-        alert('updated');
+    const handleEdit = async (id) => {
+        // alert(`updated :${id}`);
+        navigate(`/edittask/${id}`);
     }
 
     return (
@@ -86,19 +100,18 @@ export default function UserViewTask() {
                                             <div className='flex flex-wrap gap-0.5'>
                                                 <button
                                                     onClick={() => handleStatus(item._id)}
-                                                    className='text-sm transition duration-700 px-3 py-1 rounded-sm bg-amber-600 hover:bg-amber-500 text-white
-'
+                                                    className='text-sm transition duration-700 px-3 py-1 rounded-sm bg-amber-600 hover:bg-amber-500 text-white'
                                                 >
-                                                    {item.status ? 'Marks as Done' : 'Marks as Not Done'}
+                                                    {item.status ? 'Marks as Not Done' : 'Marks as Done'}
                                                 </button>
                                                 <button
-                                                    onClick={handleEdit}
+                                                    onClick={()=>handleEdit(item._id)}
                                                     className='text-sm transition duration-700 px-3 py-1 rounded-sm bg-amber-600 hover:bg-amber-500 text-white'
                                                 >
                                                     Edit
                                                 </button>
                                                 <button
-                                                    onClick={handleDelete}
+                                                    onClick={()=>handleDelete(item._id)}
                                                     className='text-sm transition duration-700 px-3 py-1 rounded-sm bg-amber-600 hover:bg-amber-500 text-white'
                                                 >
                                                     Delete
