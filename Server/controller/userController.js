@@ -57,4 +57,36 @@ const addTask = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser, addTask };
+const viewTask = async (req, res) => {
+    const userid = req.headers.userid;
+    try {
+        if (!userid) {
+            return res.status(400).json({msg:'User id not found!'});
+        }
+        const task = await Task.find({ user: userid })
+        .sort({createdAt: -1});
+        res.status(200).json(task);
+    } catch (error) {
+        console.error('View Task Server Error:', error)
+        return res.status(500).json({ msg: 'View Task Server Error' })
+    }
+
+}
+
+const statusTask = async (req,res) => {
+    const taskid = req.params.id;
+    try {
+        if (!taskid) {
+            return res.status(400).json({msg:'Task id not found!'});
+        }
+        const task = await Task.findById(taskid);
+        task.status = !task.status;
+        await task.save();
+        res.status(200).json({msg:'Task Status Updated'});
+    } catch (error) {
+        console.error('Status Task Error:',err);
+        return res.status(500).json({msg:'Status Task Error'});
+    }
+}
+
+module.exports = { statusTask, viewTask, registerUser, loginUser, addTask };
