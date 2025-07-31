@@ -13,7 +13,7 @@ export default function Register() {
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value })
     }
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -25,14 +25,16 @@ export default function Register() {
             console.log(res.data);
         } catch (error) {
             alert(error.response?.data?.msg || "Registration Failed");
-            console.error("Registration Failed:",error);
+            console.error("Registration Failed:", error);
         }
     }
 
     return (
-        <>
-        <HomeNav/>
-            <div className="p-4 max-w-sm mx-auto">
+    <>
+    <div className="min-h-screen bg-gradient-to-br from-blue-100 to-white">
+        <HomeNav />
+        <div className="flex items-center justify-center py-10">
+            <div className="p-4 max-w-sm w-full shadow-2xl rounded-2xl bg-white">
                 <h1 className="text-2xl font-bold mb-4">Register</h1>
 
                 <label htmlFor="UserName" className="block mb-1">Username</label>
@@ -55,7 +57,7 @@ export default function Register() {
 
                 <label htmlFor="Password" className="block mb-1">Password</label>
                 <input
-                    type="text"
+                    type="password"
                     id="Password"
                     name="password"
                     onChange={handleChange}
@@ -65,12 +67,15 @@ export default function Register() {
                 <button
                     type="submit"
                     onClick={handleSubmit}
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 w-full"
                 >
                     Submit
                 </button>
             </div>
-        </>
+        </div>
+    </div>
+</>
+ 
+)
 
-    )
 }

@@ -27,7 +27,7 @@ export default function Login() {
             )
             if (res.status === 200) {
                 toast.success(res.data.msg);
-                localStorage.setItem('userid',res.data.userid);
+                localStorage.setItem('userid', res.data.userid);
                 setTimeout(() => {
                     navigate('/userhome');
                 }, 1000);
@@ -40,37 +40,41 @@ export default function Login() {
 
     return (
         <>
-            <HomeNav />
-            <ToastContainer className={'mt-17'} />
-            <div className="p-4 max-w-sm mx-auto">
-                <h1 className="text-2xl font-bold mb-4">Login</h1>
+            <div className='min-h-screen bg-gradient-to-br from-blue-100 to-white'>
+                <HomeNav />
+                <ToastContainer className={'mt-17'} />
+                <div className='py-10 mx-auto my-auto  flex items-center justify-center'>
+                    <div className="p-4 max-w-sm mx-auto shadow-2xl rounded-2xl bg-white">
+                        <h1 className="text-2xl font-bold mb-4">Login</h1>
 
-                <label htmlFor="Email" className="block mb-1">Email</label>
-                <input
-                    type="text"
-                    id="Email"
-                    name="email"
-                    onChange={handleChange}
-                    className="border border-gray-300 rounded px-2 py-1 w-full mb-3"
-                />
+                        <label htmlFor="Email" className="block mb-1">Email</label>
+                        <input
+                            type="text"
+                            id="Email"
+                            name="email"
+                            onChange={handleChange}
+                            className="border border-gray-300 rounded px-2 py-1 w-full mb-3"
+                        />
 
 
-                <label htmlFor="Password" className="block mb-1">Password</label>
-                <input
-                    type="text"
-                    id="Password"
-                    name="password"
-                    onChange={handleChange}
-                    className="border border-gray-300 rounded px-2 py-1 w-full mb-3"
-                />
+                        <label htmlFor="Password" className="block mb-1">Password</label>
+                        <input
+                            type="text"
+                            id="Password"
+                            name="password"
+                            onChange={handleChange}
+                            className="border border-gray-300 rounded px-2 py-1 w-full mb-3"
+                        />
 
-                <button
-                    type="submit"
-                    onClick={handleSubmit}
-                    className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-                >
-                    Submit
-                </button>
+                        <button
+                            type="submit"
+                            onClick={handleSubmit}
+                            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+                        >
+                            Submit
+                        </button>
+                    </div>
+                </div>
             </div>
         </>
     )

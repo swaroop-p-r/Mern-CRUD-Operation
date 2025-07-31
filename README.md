@@ -31,7 +31,7 @@ Mern-CRUD-Operation/
 │   └── server.js
 ├── .gitignore
 ├── README.md
-└── package.json
+└── assets
 ````
 
 ## 🛠️ Getting Started
@@ -76,14 +76,27 @@ The frontend will typically run on `http://localhost:5173` and the backend on `h
 
 ---
 
-## 🌐 Live Demo
-
-> *(Optional: Add deployment links if hosted on Render, Vercel, or Netlify)*
-
----
-
 ## 📸 Screenshots
 
-> *(Optional: Include screenshots of UI showing CRUD operations)*
+### 🏠 Home Screen
+![Home](./assets/homeShot.png)
+
+### 🔐 User Login
+![Login](./assets/userLoginShot.png)
+
+### 📝 User Register
+![Register](./assets/userRegisterShot.png)
+
+### 🧑‍💼 User Home
+![User Home](./assets/userHomeShot.png)
+
+### ➕ Add Task
+![Add Task](./assets/userAddTaskShot.png)
+
+### 🗂️ View Task
+![View Task](./assets/userViewTaskShot.png)
+
+### ✏️ Edit Task
+![Edit Task](./assets/userEditTaskShot.png)
 
 ---

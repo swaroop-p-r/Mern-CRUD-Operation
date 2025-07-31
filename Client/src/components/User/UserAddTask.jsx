@@ -38,34 +38,38 @@ export default function UserAddTask() {
     }
     return (
         <>
-            <UserNav />
-            <ToastContainer className='mt-13' />
-            <h1 className='text-4xl text-center p-3'>Add Task</h1>
-            <div className='max-w-md mx-auto p-6 bg-amber-600 shadow-md rounded-md'>
-                <form onSubmit={handleSubmit}>
-                    <div className=''>
-                        <label className='block text-xl font-bold'>Task Title</label>
-                        <input type="text" className="mb-4 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-white"
-                            name='title'
-                            required
-                            onChange={handleChange}
-                            placeholder='Enter Task Title'
-                        />
+            <div className='min-h-screen bg-gradient-to-br from-blue-100 to-white'>
+                <UserNav />
+                <ToastContainer className='mt-13' />
+                <div className='p-10 flex items-center justify-center'>
+                <div className='max-w-md mx-auto p-6 bg-white shadow-2xl rounded-2xl'>
+                    <h1 className='text-3xl text-left pb-3 font-bold text-transparent bg-clip-text bg-gradient-to-br from-gray-600 to-blue-50'>Add Task</h1>
+                    <form onSubmit={handleSubmit}>
+                        <div className=''>
+                            <label className='block text-xl font-semibold'>Task Title</label>
+                            <input type="text" className="mb-4 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-white"
+                                name='title'
+                                required
+                                onChange={handleChange}
+                                placeholder='Enter Task Title'
+                            />
 
-                        <label className='block text-xl font-bold'>Task Decription</label>
-                        <input type="text" className='mb-4 border w-full rounded-sm py-2 px-4 focus:outline-none focus:ring-2 focus:ring-white'
-                            name='description'
-                            placeholder='Enter Task Decription'
-                            onChange={handleChange}
-                            required />
+                            <label className='block text-xl font-semibold'>Task Decription</label>
+                            <input type="text" className='mb-4 border w-full rounded-sm py-2 px-4 focus:outline-none focus:ring-2 focus:ring-white'
+                                name='description'
+                                placeholder='Enter Task Decription'
+                                onChange={handleChange}
+                                required />
 
-                        <button type="submit"
-                            className='border rounded-sm py-2 px-2 bg-amber-700 text-black hover:bg-amber-700 hover:text-white transition duration-600'
-                        >
-                            Add Task
-                        </button>
-                    </div>
-                </form>
+                            <button type="submit"
+                                className='border rounded-sm py-2 px-2 bg-gradient-to-br from-slate-400 to-white text-black hover:bg-gradient-to-tl transition duration-500 '
+                            >
+                                Add Task
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                </div>
             </div>
         </>
     )
